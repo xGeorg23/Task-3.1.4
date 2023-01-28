@@ -39,13 +39,6 @@ public class UserServiceImp implements UserService, UserDetailsService {
 
     @Transactional
     @Override
-    public User getUserById(Long id) {
-        return userRepository.findById(id)
-                .orElse(null);
-    }
-
-    @Transactional
-    @Override
     public void deleteUserById(Long id) {
         userRepository.deleteById(id);
     }
@@ -54,12 +47,14 @@ public class UserServiceImp implements UserService, UserDetailsService {
     @Override
     public void updateUser(Long id, User updateUser) {
         User user = userRepository.findById(id).orElse(null);
-        user.setName(updateUser.getName());
-        user.setLastName(updateUser.getLastName());
-        user.setEmail(updateUser.getEmail());
-        user.setPassword(passwordEncoder.encode(updateUser.getPassword()));
-        user.setRoles(updateUser.getRoles());
-        userRepository.save(user);
+        if (user != null) {
+            user.setName(updateUser.getName());
+            user.setLastName(updateUser.getLastName());
+            user.setEmail(updateUser.getEmail());
+            user.setPassword(passwordEncoder.encode(updateUser.getPassword()));
+            user.setRoles(updateUser.getRoles());
+            userRepository.save(user);
+        }
     }
 
     @Transactional

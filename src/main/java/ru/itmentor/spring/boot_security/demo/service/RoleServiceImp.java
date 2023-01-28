@@ -25,20 +25,4 @@ public class RoleServiceImp implements RoleService {
     public List<Role> allRole() {
         return roleRepository.findAll();
     }
-
-    @Transactional
-    @Override
-    public Role getRoleById(Long id) {
-        return roleRepository.findById(id).orElse(null);
-    }
-
-    @Transactional
-    @Override
-    public Set<Role> getRole(List<String> rolesId) {
-        Set<Role> roleSet = new HashSet<>();
-        for (String id: rolesId) {
-            roleSet.add(getRoleById(Long.parseLong(id)));
-        }
-        return roleSet;
-    }
 }
