@@ -27,13 +27,13 @@ public class AdminController {
 
     @PostMapping("/admin")
     public ResponseEntity<User> addUser(@RequestBody User user){
-        userService.save(user);
+        userService.saveUser(user);
         return ResponseEntity.ok(user);
     }
 
     @GetMapping("/roles")
     public ResponseEntity<List<Role>> getAllRoles() {
-        return ResponseEntity.ok(roleService.allRole());
+        return ResponseEntity.ok(roleService.getAllRole());
     }
 
     @GetMapping("/header")
